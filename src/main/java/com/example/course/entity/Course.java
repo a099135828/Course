@@ -1,54 +1,25 @@
 package com.example.course.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy; // <-- 1. 导入这个类
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class Course {
-    private String Cno;
-    private String Cname;
-    private int Ccredit;
-    private String Cpno;
 
-    @Override
-    public String toString() {
-        return "Course{" +
-                "Ccredit=" + Ccredit +
-                ", Cno='" + Cno + '\'' +
-                ", Cname='" + Cname + '\'' +
-                ", Cpno='" + Cpno + '\'' +
-                '}';
-    }
+    // 【优化建议】@TableId 已经包含了字段映射功能，可以移除多余的 @TableField
+    @TableId(value = "Cno", type = IdType.INPUT)
+    private String cno;
 
-    public String getCname() {
-        return Cname;
-    }
+    @TableField("Cname")
+    private String cname;
 
-    public void setCname(String cname) {
-        this.Cname = cname;
-    }
+    @TableField("Ccredit")
+    private Integer ccredit;
 
-    public int getCcredit() {
-        return Ccredit;
-    }
-
-    public void setCcredit(int ccredit) {
-        this.Ccredit = ccredit;
-    }
-
-    public String getCno() {
-        return Cno;
-    }
-
-    public void setCno(String cno) {
-        this.Cno = cno;
-    }
-
-    public String getCpno() {
-        return Cpno;
-    }
-
-    public void setCpno(String cpno) {
-        this.Cpno = cpno;
-    }
-
+    // 【核心修改】在这里指定插入策略为 ALWAYS
+    @TableField(value = "Cpno", insertStrategy = FieldStrategy.ALWAYS) // <-- 2. 修改这里
+    private String cpno;
 }

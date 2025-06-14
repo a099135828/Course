@@ -18,6 +18,7 @@ public class NewCourseController {
     // 新增课程
     @PostMapping
     public ResponseEntity<Void> createCourse(@RequestBody Course course) {
+        System.out.println("接收到的课程数据：" + course);
         courseMapper.insert(course);
         return ResponseEntity.status(201).build();
     }
