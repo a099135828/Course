@@ -1,55 +1,26 @@
 package com.example.course.entity;
 
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 import java.sql.Date;
 
+@Data // Lombok 注解：自动生成 Getter, Setter, toString, equals, hashCode
 public class Student {
-    private String Sno;
-    private String Sname;
-    private Date Sbirthdate;
-    private String Smajor;
 
-    public String getSno() {
-        return Sno;
-    }
+    @TableId(value = "Sno", type = IdType.INPUT) // 声明主键，类型为手动输入
+    private String sno;
 
-    public void setSno(String sno) {
-        this.Sno = sno;
-    }
+    @TableField("Sname")
+    private String sname;
 
-    public String getSname() {
-        return Sname;
-    }
+    @TableField("Ssex")
+    private String ssex; // 补全 Ssex 字段
 
-    public void setSname(String sname) {
-        this.Sname = sname;
-    }
+    @TableField("Sbirthdate")
+    private Date sbirthdate;
 
-    public Date getSbirthdate() {
-        return Sbirthdate;
-    }
-
-    public void setSbirthdate(Date sbirthdate) {
-        this.Sbirthdate = sbirthdate;
-    }
-
-    public String getSmajor() {
-        return Smajor;
-    }
-
-    public void setSmajor(String smajor) {
-        this.Smajor = smajor;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "Sno=" + Sno +
-                ", Sname=" + Sname +
-                ", Sbirthdate='" + Sbirthdate + '\'' +
-                ", Smajor=" + Smajor +
-                '}';
-    }
-
-
+    @TableField("Smajor")
+    private String smajor;
 }
