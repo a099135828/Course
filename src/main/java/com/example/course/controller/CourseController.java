@@ -43,7 +43,7 @@ public class CourseController {
 
     // 查询所有课程 -> 修改为查询课程详情（分页）
     @GetMapping
-    public PageResult<CourseDto> getAllCourses(
+    public PageResult<CourseDto> getCourses(
             @RequestParam(value = "page", defaultValue = "1") long page,
             @RequestParam(value = "size", defaultValue = "10") long size
     ) {
@@ -55,5 +55,10 @@ public class CourseController {
 
         // 3. 封装成 PageResult 返回
         return new PageResult<>(courseRecords, pageRequest.getTotal());
+    }
+
+    @GetMapping("/all")
+    public List<Course> getAllCourses() {
+        return courseMapper.selectList(null);
     }
 }

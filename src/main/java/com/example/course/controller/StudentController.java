@@ -3,6 +3,7 @@ package com.example.course.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.course.dto.PageResult;
 import com.example.course.dto.StudentDto;
+import com.example.course.entity.Course;
 import com.example.course.entity.Student;
 import com.example.course.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class StudentController {
 
     // 分页查询所有学生（包含选课数量）
     @GetMapping
-    public PageResult<StudentDto> getAllStudents(
+    public PageResult<StudentDto> getStudents(
             // 修改这里：明确指定请求参数的名称
             @RequestParam(value = "page", defaultValue = "1") long page,
             @RequestParam(value = "size", defaultValue = "10") long size
@@ -34,6 +35,11 @@ public class StudentController {
 
         // 3. 封装成我们自定义的 PageResult 对象返回给前端
         return new PageResult<>(studentRecords, pageRequest.getTotal());
+    }
+
+    @GetMapping("/all")
+    public List<Student> getAllStudents() {
+        return studentMapper.selectList(null);
     }
 
     // 新增学生
