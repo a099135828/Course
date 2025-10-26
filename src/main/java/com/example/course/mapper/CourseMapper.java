@@ -23,14 +23,10 @@ public interface CourseMapper extends BaseMapper<Course> {
                     "  COUNT(sc.Sno) AS studentCount, " +
                     "  AVG(sc.Grade) AS averageGrade, " +
                     "  c2.Cname AS prerequisiteCourseName " +
-                    "FROM " +
-                    "  course c1 " +
-                    "LEFT JOIN " + // 使用 LEFT JOIN 确保没有学生选的课也能被查询出来
-                    "  sc ON c1.Cno = sc.Cno " +
-                    "LEFT JOIN " + // 自连接，用于查询先修课名称
-                    "  course c2 ON c1.Cpno = c2.Cno " +
-                    "GROUP BY " +
-                    "  c1.Cno"
+                    "FROM " + "  course c1 " +
+                    "LEFT JOIN " + "  sc ON c1.Cno = sc.Cno " +
+                    "LEFT JOIN " + "  course c2 ON c1.Cpno = c2.Cno " +
+                    "GROUP BY " + "  c1.Cno"
     )
     List<CourseDto> selectCourseDetails(Page<CourseDto> page);
 }

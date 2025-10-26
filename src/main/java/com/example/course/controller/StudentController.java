@@ -29,10 +29,8 @@ public class StudentController {
     ) {
         // 1. 创建 MyBatis-Plus 的 Page 对象
         Page<StudentDto> pageRequest = new Page<>(page, size);
-
         // 2. 调用修改后的 Mapper 方法进行分页查询
         List<StudentDto> studentRecords = studentMapper.selectStudentWithCourseCount(pageRequest);
-
         // 3. 封装成我们自定义的 PageResult 对象返回给前端
         return new PageResult<>(studentRecords, pageRequest.getTotal());
     }

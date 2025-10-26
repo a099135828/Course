@@ -49,10 +49,8 @@ public class CourseController {
     ) {
         // 1. 创建 Page 对象，注意泛型是 CourseDto
         Page<CourseDto> pageRequest = new Page<>(page, size);
-
         // 2. 调用我们自定义的 Mapper 方法
         List<CourseDto> courseRecords = courseMapper.selectCourseDetails(pageRequest);
-
         // 3. 封装成 PageResult 返回
         return new PageResult<>(courseRecords, pageRequest.getTotal());
     }

@@ -33,13 +33,10 @@ public class OpenAIController {
     public Flux<String> openaiStream(@RequestBody ChatRequest request) { // 4. 使用 @RequestBody 和 DTO
         // 5. 从请求对象中获取消息
         String message = request.getMessage();
-
         // 核心的 AI调用逻辑保持不变
         Flux<String> result = chatModel.stream(message);
-
         // 打印流式输出到控制台 (用于调试)
         result.doOnNext(System.out::print).subscribe();
-
         return result;
     }
 }
